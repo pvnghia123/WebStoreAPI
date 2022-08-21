@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using WebStoreAPI.Interface;
 using WebStoreAPI.Models;
 using WebStoreAPI.Models.DatebaseContext;
@@ -25,6 +26,12 @@ namespace WebStoreAPI.Repository
                 throw;
             }
             
+        }
+
+        public UserInfo GetUser(string Email, string Password)
+        {
+            // throw new System.NotImplementedException();
+            return context.UserInfos.FirstOrDefault(c => c.Email == Email && c.Password == Password);
         }
     }
 }
