@@ -18,10 +18,12 @@ namespace WebStoreAPI.Controllers
     {
         private IUserInfo IUserInfo;
         private IConfiguration _configuration;
-        public TokenController (IUserInfo iUserInfo, IConfiguration configuration)
+        private IAcccessToken AcccessToken;
+        public TokenController (IUserInfo iUserInfo, IConfiguration configuration, IAcccessToken acccessToken)
         {
             IUserInfo = iUserInfo;
             _configuration = configuration;
+            AcccessToken = acccessToken;
         }
         [HttpPost]
         public IActionResult Post(UserInfo _info)
@@ -32,25 +34,8 @@ namespace WebStoreAPI.Controllers
                 if (user != null)
                 {
                     // create token
-                    var calaims = new[]
-                    {
-                        new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]),
-                        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                        new Claim(JwtRegisteredClaimNames.Iat, DateTime.Now.ToString()),
-                        new Claim("Id",user.UserId.ToString()),
-                        new Claim("FirstName", user.FistName),
-                        new Claim("LastName",user.LastName),
-                        new Claim("UserName",user.UserName),
-                        new Claim("Email",user.Email)
-                    };
-                    var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
-                    var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-                    var token = new JwtSecurityToken(_configuration["Jwt:Issuer"],
-                        _configuration["Jwt:Audience"],
-                        calaims,
-                        expires: DateTime.UtcNow.AddMinutes(5),
-                        signingCredentials: signIn);
-                    return Ok(new JwtSecurityTokenHandler().WriteToken(token));
+                    string token = AcccessToken.GenerationToken(user, _configuration);
+                    return Ok(token);
                 }
                 else
                 {

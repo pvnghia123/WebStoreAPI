@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace WebStoreAPI.Controllers
 {
-    [Authorize]
+  
     [Route("api/[controller]")]
     [ApiController]
     public class ProductController : ControllerBase
@@ -23,9 +23,10 @@ namespace WebStoreAPI.Controllers
 
         // GET: api/<ProductController>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>>  Get()
+        [Authorize(policy:"admin")]
+        public ActionResult<IEnumerable<Product>>  Get()
         {
-            return await Task.FromResult(_IProduct.getAllProduct());
+            return  Ok(_IProduct.getAllProduct());
         }
 
         // GET api/<ProductController>/5

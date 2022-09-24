@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using WebStoreAPI.Interface;
 using WebStoreAPI.Models;
 using WebStoreAPI.Models.DatebaseContext;
@@ -14,38 +15,34 @@ namespace WebStoreAPI.Repository
             _dbcontext = dbcontext;
         }
 
-       public bool AddProduct(Product product)
+        public BaseResponse<IEnumerable<Product>> getAllProduct()
         {
-            throw new System.NotImplementedException();
-        }
-
-        public bool DeleteProduct(int id)
-        {
-            throw new System.NotImplementedException();
-        }
-
-       public List<Product> getAllProduct()
-        {
-            //throw new System.NotImplementedException();
-            // viet cau lenh truy van sql o day
-            try
+            var result = new BaseResponse<IEnumerable<Product>>
             {
-                return _dbcontext.Products.ToList();
-            }
-            catch
+                Success = true,
+                Data = new List<Product>()
+
+            };
+            if (_dbcontext.Products.ToList() == null)
             {
-                throw;
+                result.ErrorMessage = "error";
+                return result;
             }
+
+            result.Data = _dbcontext.Products.ToList();
+            return result;
         }
 
-        public Product GetProductById(int id)
-        {
-            throw new System.NotImplementedException();
-        }
+        //public Task<BaseResponse<IEnumerable<Product>>> getAllProduct()
+        //{
+        //    var result = new BaseResponse<IEnumerable<Product>>
+        //    {
+        //        Success = true,
+        //        Data = new List<Product>()
 
-        public bool UpdateProduct(Product product)
-        {
-            throw new System.NotImplementedException();
-        }
+        //    };
+        //    result.Data =  _dbcontext.Products.ToList();
+        //    return result;
+        //}
     }
 }

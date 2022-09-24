@@ -16,7 +16,12 @@ using WebStoreAPI.Models.DatebaseContext;
 using WebStoreAPI.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Swashbuckle.AspNetCore;
 using System.Text;
+using Swashbuckle.Swagger;
+using Microsoft.OpenApi.Models;
+using WebStoreAPI.Service;
+
 namespace WebStoreAPI
 {
     public class Startup
@@ -36,22 +41,12 @@ namespace WebStoreAPI
             services.AddTransient<IProduct, ProductRepository>();
             //services.AddTransient<IUserInfo, UserInfoRepository>();
             services.AddScoped<IUserInfo, UserInfoRepository>();
+            services.AddScoped<IAcccessToken, AssessTokenRepository>();
             services.AddControllers();
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(option =>
-            {
-                option.RequireHttpsMetadata = false;
-                option.SaveToken = true;
-                option.TokenValidationParameters = new TokenValidationParameters()
-                {
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidAudience = Configuration["Jwt:Audience"],
-                    ValidIssuer = Configuration["Jwt:Issuer"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
-                };
-
-            });
-
+            services.AddSwaggerGen();
+            services.AddAuthentication(Configuration);
+            services.AddSwaggerDocumentation();
+            services.AddAuthorizationStarup();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,14 +55,14 @@ namespace WebStoreAPI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwaggerDocumentation();
             }
 
             app.UseHttpsRedirection();
-
+            app.UseSwagger();
             app.UseRouting();
-
-            app.UseAuthorization();
             app.UseAuthentication();
+            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

@@ -44,9 +44,17 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
+            "AspNet.Security.OpenIdConnect.Primitives": {
+              "target": "Package",
+              "version": "[2.0.0, )"
+            },
+            "IdentityServer4": {
+              "target": "Package",
+              "version": "[4.1.2, )"
+            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
-              "version": "[3.1.8, )"
+              "version": "[3.1.28, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
@@ -61,6 +69,14 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[3.1.4, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.4.0, )"
+            },
+            "Swashbuckle.Core": {
+              "target": "Package",
+              "version": "[5.6.0, )"
             },
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",
