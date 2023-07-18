@@ -73,6 +73,7 @@ namespace WebStoreAPI.Service
              });
              return services;
         }
+        /*khong dung tơi*/
         public static IServiceCollection AddAuthorizationStarup(this IServiceCollection services)
         {
             services.AddAuthorization(options =>

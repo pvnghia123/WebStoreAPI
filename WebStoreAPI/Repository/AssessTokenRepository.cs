@@ -17,12 +17,12 @@ namespace WebStoreAPI.Repository
     {
         public string GenerationToken(UserInfo user, IConfiguration _configuration)
         {
-            ArrayList list = new ArrayList();
-            list.Add("role:Create");
-            list.Add("role:Update");
-            list.Add("role:Delete");
-            list.Add("role:Search");
-            string listjson = JsonConvert.SerializeObject(list);
+            //ArrayList list = new ArrayList();
+            //list.Add("role:Create");
+            //list.Add("role:Update");
+            //list.Add("role:Delete");
+           // list.Add("role:Search");
+            //string listjson = JsonConvert.SerializeObject(list);
 
             // create token
             var calaims = new[]
@@ -38,7 +38,7 @@ namespace WebStoreAPI.Repository
                 new Claim("Roles","role:Create"),
                 new Claim("Roles", "role:Update"),
                 new Claim("Roles", "role:Delete"),
-                new Claim("Roles", "role:Search"),
+                //new Claim("Roles", "role:Search"),
             };
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
             var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);

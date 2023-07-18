@@ -46,7 +46,8 @@ namespace WebStoreAPI
             services.AddSwaggerGen();
             services.AddAuthentication(Configuration);
             services.AddSwaggerDocumentation();
-            services.AddAuthorizationStarup();
+            //services.AddAuthorizationStarup();
+            services.ConfiguareCors(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,6 +57,10 @@ namespace WebStoreAPI
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwaggerDocumentation();
+            } else
+            {
+                app.UseExceptionHandler("/Error");
+                app.UseHsts();
             }
 
             app.UseHttpsRedirection();
@@ -63,6 +68,9 @@ namespace WebStoreAPI
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseCors("AnotherPolicy");
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

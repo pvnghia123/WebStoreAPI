@@ -5,6 +5,7 @@ using WebStoreAPI.Models;
 using WebStoreAPI.Interface;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
+using WebStoreAPI.Authorization;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -13,9 +14,11 @@ namespace WebStoreAPI.Controllers
   
     [Route("api/[controller]")]
     [ApiController]
+    [Log(1)]
     public class ProductController : ControllerBase
     {
         private readonly IProduct _IProduct;
+        string text = "sdfsdf";
         public ProductController(IProduct iProduct)
         {
             _IProduct = iProduct;
@@ -23,7 +26,9 @@ namespace WebStoreAPI.Controllers
 
         // GET: api/<ProductController>
         [HttpGet]
-        [Authorize(policy:"admin")]
+        // [Authorize(policy:"admin")]
+        //[OutputCache(Duration = 10)]
+       // [ClaimRequirement("Roles", "role:Search")]
         public ActionResult<IEnumerable<Product>>  Get()
         {
             return  Ok(_IProduct.getAllProduct());

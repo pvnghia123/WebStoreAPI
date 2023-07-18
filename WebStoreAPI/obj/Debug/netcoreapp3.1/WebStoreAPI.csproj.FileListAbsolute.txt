@@ -144,3 +144,10 @@ C:\Users\BASE\source\repos\WebStoreAPI\WebStoreAPI\bin\Debug\netcoreapp3.1\Ident
 C:\Users\BASE\source\repos\WebStoreAPI\WebStoreAPI\bin\Debug\netcoreapp3.1\IdentityServer4.Storage.dll
 C:\Users\BASE\source\repos\WebStoreAPI\WebStoreAPI\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.OpenIdConnect.dll
 C:\Users\BASE\source\repos\WebStoreAPI\WebStoreAPI\bin\Debug\netcoreapp3.1\AspNet.Security.OpenIdConnect.Primitives.dll
+C:\Users\BASE\source\repos\WebStoreAPI\WebStoreAPI\bin\Debug\netcoreapp3.1\System.Web.Mvc.dll
+C:\Users\BASE\source\repos\WebStoreAPI\WebStoreAPI\bin\Debug\netcoreapp3.1\System.Web.Razor.dll
+C:\Users\BASE\source\repos\WebStoreAPI\WebStoreAPI\bin\Debug\netcoreapp3.1\System.Web.Helpers.dll
+C:\Users\BASE\source\repos\WebStoreAPI\WebStoreAPI\bin\Debug\netcoreapp3.1\System.Web.WebPages.Deployment.dll
+C:\Users\BASE\source\repos\WebStoreAPI\WebStoreAPI\bin\Debug\netcoreapp3.1\System.Web.WebPages.Razor.dll
+C:\Users\BASE\source\repos\WebStoreAPI\WebStoreAPI\bin\Debug\netcoreapp3.1\System.Web.WebPages.dll
+C:\Users\BASE\source\repos\WebStoreAPI\WebStoreAPI\bin\Debug\netcoreapp3.1\Microsoft.Web.Infrastructure.dll
